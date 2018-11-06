@@ -52,13 +52,14 @@ def import_objects(file):
     for x in read_file:
         REGEX_IP = re.findall(r'[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}',x[0]) # Regex to Verify if exist ip address in object name
         if REGEX_IP:
-                OBJECT_EXCEPTION.append(x)               
+            OBJECT_EXCEPTION.append(x)
+            x = x[0].split(':')
         try:
-                OBJECT_NAME = x[0]
-                OBJECT_VALUE = x[1]                
-                OBJECTS.append({ OBJECT_NAME : OBJECT_VALUE })
+            OBJECT_NAME = x[0]
+            OBJECT_VALUE = x[1]                
+            OBJECTS.append({ OBJECT_NAME : OBJECT_VALUE })
         except:
-                pass
+            pass
     return OBJECTS
 
 
