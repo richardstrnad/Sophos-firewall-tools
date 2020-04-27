@@ -68,7 +68,7 @@ def create_iphost(nameObj, ipAddr, type_obj='IP_HOST'): # Create a object type I
     IP_ADDRESS = ipAddr
 
     try:
-        r_api = requests.get("https://{host_fw}:{defaultport}/webconsole/APIController?reqxml=<Request><Login><Username>{username}</Username><Password>{password}</Password></Login><Set operation='add'><IPHost><Name>{name}</Name><IPFamily>IPv4</IPFamily><HostType>IP</HostType><IPAddress>{ipaddress}</IPAddress></IPHost></Set></Request>".format(host_fw=_CONFIGS['host_fw'],defaultport=_CONFIGS['default_port'],username=_CONFIGS['username_fw'], password=_CONFIGS['passwd_fw'], name=NAME_OBJECT, ipaddress=IP_ADDRESS),verify=False)
+        r_api = requests.get("https://{host_fw}:{defaultport}/webconsole/APIController?reqxml=<Request><Login><Username>{username}</Username>passwordform='plain'>{password}</Password></Login><Set operation='add'><IPHost><Name>{name}</Name><IPFamily>IPv4</IPFamily><HostType>IP</HostType><IPAddress>{ipaddress}</IPAddress></IPHost></Set></Request>".format(host_fw=_CONFIGS['host_fw'],defaultport=_CONFIGS['default_port'],username=_CONFIGS['username_fw'], password=_CONFIGS['passwd_fw'], name=NAME_OBJECT, ipaddress=IP_ADDRESS),verify=False)
         if 'API operations are not allowed from the requester IP address' in r_api.content:
             print('{0}[+]{1} API operations are not allowed from the requester IP address'.format(_COLORS['OK'],_COLORS['ENDC'],NAME_OBJECT))
             sys.exit(0)
